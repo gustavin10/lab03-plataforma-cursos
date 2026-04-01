@@ -6,7 +6,7 @@ Trabalho prático desenvolvido com **HTML5**, **Bootstrap 5** e **JavaScript ES6
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/SEU_USUARIO/lab03-plataforma-cursos.git
+git clone https://github.com/gustavin10/lab03-plataforma-cursos.git
 cd lab03-plataforma-cursos
 ```
 
@@ -55,4 +55,4 @@ lab03-plataforma-cursos/
 ```
 
 ## Integrantes
-- (Seu nome aqui)
+- Gustavo Oliveira Milhomem
