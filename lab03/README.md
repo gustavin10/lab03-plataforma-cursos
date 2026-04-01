@@ -1,58 +1,61 @@
 # LAB03 — Plataforma de Cursos Online
 
-Trabalho prático desenvolvido com **HTML5**, **Bootstrap 5** e **JavaScript ES6+**.
+Trabalho do LAB03 feito com HTML5, Bootstrap 5 e JavaScript puro.
 
-## Como executar
+## Como rodar
 
-1. Clone o repositório:
-```bash
+Clonar o repositório e abrir o `index.html` direto no navegador, não precisa de servidor.
+
+
 git clone https://github.com/gustavin10/lab03-plataforma-cursos.git
 cd lab03-plataforma-cursos
-```
 
-2. Abra o arquivo `index.html` diretamente no navegador (não precisa de servidor).
 
-## Funcionalidades implementadas
+## O que foi implementado
 
-### Módulo Acadêmico
-- Cadastro de Categorias
-- Cadastro de Cursos (com filtro por categoria)
-- Cadastro de Módulos (com campo Ordem)
-- Cadastro de Aulas (com campo Ordem e tipo de conteúdo)
-- Trilhas de Conhecimento + vinculação de cursos (Trilhas_Cursos com Ordem)
+**Cadastros básicos**
+- Usuários (com validação de e-mail duplicado)
+- Categorias
+- Cursos (filtro por categoria na listagem)
+- Módulos e Aulas (ambos com campo de ordem)
 
-### Módulo de Usuário e Progresso
-- Cadastro de Usuários (com validação de e-mail)
-- Matrículas em cursos ou assinatura de planos
-- Controle de progresso de aulas (Status Concluído)
-- Geração automática de Certificados com código de verificação
+**Matrículas e progresso**
+- Matrícula em curso individual ou via assinatura de plano
+- Controle de progresso por aula
+- Certificado gerado automaticamente quando todas as aulas são concluídas
 
-### Módulo de Interação
-- Avaliações de cursos (Nota 1 a 5 + comentário)
+**Trilhas**
+- Cadastro de trilhas de conhecimento vinculadas a categorias
+- Associação de cursos às trilhas com ordem definida
 
-### Módulo Financeiro
-- Cadastro de Planos
-- Fluxo de Checkout com escolha de método de pagamento
-- Geração de ID de Transação automático
-- Histórico de Pagamentos e Assinaturas
+**Avaliações**
+- Nota de 1 a 5 com comentário opcional
+- Um usuário só pode avaliar um curso uma vez
 
-## Tecnologias
-- HTML5 semântico
-- Bootstrap 5.3 (Grid, Cards, Modais, Tabelas, Navbar, Badges)
-- JavaScript ES6+ (Classes, Arrow Functions, Array Methods, DOM Events)
-- Persistência em memória (sem banco de dados)
+**Financeiro**
+- Cadastro de planos com preço e duração em meses
+- Fluxo de checkout com geração automática de ID de transação
+- Histórico de pagamentos e assinaturas ativas
 
-## Estrutura de arquivos
+## Estrutura
+
 ```
 lab03-plataforma-cursos/
-├── index.html       ← Estrutura HTML com todas as abas e modais
+├── index.html
 ├── css/
-│   └── style.css    ← Estilos customizados
+│   └── style.css
 ├── js/
-│   ├── models.js    ← Classes JS (entidades do modelo de dados)
-│   └── app.js       ← Lógica de negócio, validações e eventos DOM
+│   ├── models.js
+│   └── app.js
 └── README.md
 ```
 
-## Integrantes
+## Tecnologias
+
+- HTML5 + Bootstrap 5.3
+- JavaScript ES6+ (classes, arrow functions, manipulação do DOM)
+- Dados em memória (sem banco de dados)
+
+## Integrante
+
 - Gustavo Oliveira Milhomem
