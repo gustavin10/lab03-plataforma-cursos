@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduPlataforma — LAB03</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav class="navbar navbar-dark bg-primary shadow-sm">
+  <div class="container-fluid">
+    <span class="navbar-brand fw-bold">📚 EduPlataforma</span>
+    <span class="text-white-50 small">LAB03 — Plataforma de Cursos Online</span>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     ABAS DE NAVEGACAO
+════════════════════════════════════════════ -->
+<div class="container-fluid mt-3 px-4">
+  <ul class="nav nav-tabs flex-nowrap overflow-auto" id="mainTab">
+    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-usuarios">Usuários</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-categorias">Categorias</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-cursos">Cursos</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-modulos">Módulos</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-aulas">Aulas</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-matriculas">Matrículas</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-progresso">Progresso</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-avaliacoes">Avaliações</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-trilhas">Trilhas</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tab-financeiro">Financeiro</a></li>
+  </ul>
+
+  <div class="tab-content mt-3" id="mainTabContent">
+
+    <!-- ──────────────────────────────────────
+         ABA: USUARIOS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade show active" id="tab-usuarios">
+      <div class="section-header">
+        <h6>Usuários Cadastrados</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalUsuario">+ Novo Usuário</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Nome Completo</th><th>E-mail</th><th>Data Cadastro</th></tr></thead>
+          <tbody id="usr-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: CATEGORIAS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-categorias">
+      <div class="section-header">
+        <h6>Categorias</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCategoria">+ Nova Categoria</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Nome</th><th>Descrição</th></tr></thead>
+          <tbody id="cat-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: CURSOS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-cursos">
+      <div class="section-header">
+        <h6>Cursos</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCurso">+ Novo Curso</button>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="form-label small text-muted">Filtrar por Categoria:</label>
+          <select id="filtro-categoria-cursos" class="form-select form-select-sm">
+            <option value="">Todas as categorias</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Título</th><th>Categoria</th><th>Instrutor</th><th>Nível</th><th>Publicado em</th></tr></thead>
+          <tbody id="cur-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: MODULOS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-modulos">
+      <div class="section-header">
+        <h6>Módulos</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalModulo">+ Novo Módulo</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Curso</th><th>Título</th><th>Ordem</th></tr></thead>
+          <tbody id="mod-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: AULAS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-aulas">
+      <div class="section-header">
+        <h6>Aulas</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalAula">+ Nova Aula</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Módulo</th><th>Título</th><th>Tipo</th><th>Duração</th><th>Ordem</th></tr></thead>
+          <tbody id="aul-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: MATRICULAS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-matriculas">
+      <div class="section-header">
+        <h6>Matrículas e Assinaturas</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalMatricula">+ Nova Matrícula</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>#</th><th>Usuário</th><th>Curso</th><th>Data Matrícula</th></tr></thead>
+          <tbody id="mat-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: PROGRESSO
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-progresso">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Progresso de Aulas</h6>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalProgresso">+ Marcar Aula Concluída</button>
+          </div>
+          <div class="table-responsive mb-4">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>Usuário</th><th>Aula</th><th>Status</th><th>Data Conclusão</th></tr></thead>
+              <tbody id="prog-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="section-header">
+            <h6>🎓 Certificados Emitidos</h6>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>#</th><th>Usuário</th><th>Curso</th><th>Código de Verificação</th><th>Emitido em</th></tr></thead>
+              <tbody id="cert-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: AVALIACOES
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-avaliacoes">
+      <div class="section-header">
+        <h6>Avaliações de Cursos</h6>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalAvaliacao">+ Nova Avaliação</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead><tr><th>Usuário</th><th>Curso</th><th>Nota</th><th>Comentário</th><th>Data</th></tr></thead>
+          <tbody id="avl-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: TRILHAS
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-trilhas">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Trilhas de Conhecimento</h6>
+            <div>
+              <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalTrilha">+ Nova Trilha</button>
+              <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalTrilhaCurso">+ Vincular Curso à Trilha</button>
+            </div>
+          </div>
+          <div class="table-responsive mb-4">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>#</th><th>Título</th><th>Categoria</th></tr></thead>
+              <tbody id="tri-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Cursos nas Trilhas (Sequência)</h6>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>Trilha</th><th>Curso</th><th>Ordem</th></tr></thead>
+              <tbody id="tc-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────
+         ABA: FINANCEIRO
+    ─────────────────────────────────────── -->
+    <div class="tab-pane fade" id="tab-financeiro">
+      <div class="row g-3">
+        <!-- Planos -->
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Planos</h6>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalPlano">+ Novo Plano</button>
+          </div>
+          <div class="table-responsive mb-4">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>#</th><th>Nome</th><th>Preço</th><th>Duração</th></tr></thead>
+              <tbody id="pla-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Checkout -->
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Assinaturas Ativas</h6>
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalCheckout">💳 Novo Checkout</button>
+          </div>
+          <div class="table-responsive mb-4">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>#</th><th>Usuário</th><th>Plano</th><th>Início</th><th>Vencimento</th></tr></thead>
+              <tbody id="ass-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Pagamentos -->
+        <div class="col-12">
+          <div class="section-header">
+            <h6>Histórico de Pagamentos</h6>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead><tr><th>#</th><th>Usuário</th><th>Plano</th><th>Valor</th><th>Método</th><th>ID Transação</th><th>Data</th></tr></thead>
+              <tbody id="pay-tabela"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-content -->
+</div><!-- /container -->
+
+
+<!-- ═══════════════════════════════════════════
+     MODAIS
+════════════════════════════════════════════ -->
+
+<!-- MODAL: Novo Usuário -->
+<div class="modal fade" id="modalUsuario" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Novo Usuário</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Nome Completo *</label>
+          <input type="text" id="usr-nome" class="form-control" placeholder="Ex: João da Silva">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">E-mail *</label>
+          <input type="email" id="usr-email" class="form-control" placeholder="email@exemplo.com">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Senha *</label>
+          <input type="password" id="usr-senha" class="form-control" placeholder="Mínimo 6 caracteres">
+        </div>
+        <div id="usr-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarUsuario()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nova Categoria -->
+<div class="modal fade" id="modalCategoria" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Nova Categoria</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Nome *</label>
+          <input type="text" id="cat-nome" class="form-control" placeholder="Ex: Programação">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Descrição</label>
+          <textarea id="cat-desc" class="form-control" rows="3" placeholder="Descrição opcional"></textarea>
+        </div>
+        <div id="cat-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarCategoria()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Curso -->
+<div class="modal fade" id="modalCurso" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Novo Curso</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Título *</label>
+            <input type="text" id="cur-titulo" class="form-control" placeholder="Ex: JavaScript do Zero ao Avançado">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Descrição</label>
+            <textarea id="cur-desc" class="form-control" rows="2" placeholder="Descrição do curso"></textarea>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Instrutor *</label>
+            <select id="cur-instrutor" class="form-select">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Categoria *</label>
+            <select id="cur-categoria" class="form-select">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Nível *</label>
+            <select id="cur-nivel" class="form-select">
+              <option value="">Selecione...</option>
+              <option>Iniciante</option>
+              <option>Intermediário</option>
+              <option>Avançado</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Total de Aulas</label>
+            <input type="number" id="cur-aulas" class="form-control" min="0" placeholder="0">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Total de Horas</label>
+            <input type="number" id="cur-horas" class="form-control" min="0" step="0.5" placeholder="0">
+          </div>
+        </div>
+        <div id="cur-erro" class="text-danger mt-2 d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarCurso()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Módulo -->
+<div class="modal fade" id="modalModulo" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Novo Módulo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Curso *</label>
+          <select id="mod-curso" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Título do Módulo *</label>
+          <input type="text" id="mod-titulo" class="form-control" placeholder="Ex: Fundamentos de JS">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Ordem *</label>
+          <input type="number" id="mod-ordem" class="form-control" min="1" placeholder="1">
+        </div>
+        <div id="mod-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarModulo()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nova Aula -->
+<div class="modal fade" id="modalAula" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Nova Aula</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Módulo *</label>
+            <select id="aul-modulo" class="form-select">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Tipo de Conteúdo *</label>
+            <select id="aul-tipo" class="form-select">
+              <option value="">Selecione...</option>
+              <option>Vídeo</option>
+              <option>Texto</option>
+              <option>Quiz</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Título da Aula *</label>
+            <input type="text" id="aul-titulo" class="form-control" placeholder="Ex: Introdução às variáveis">
+          </div>
+          <div class="col-12">
+            <label class="form-label">URL do Conteúdo</label>
+            <input type="url" id="aul-url" class="form-control" placeholder="https://...">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Duração (minutos)</label>
+            <input type="number" id="aul-duracao" class="form-control" min="1" placeholder="0">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Ordem *</label>
+            <input type="number" id="aul-ordem" class="form-control" min="1" placeholder="1">
+          </div>
+        </div>
+        <div id="aul-erro" class="text-danger mt-2 d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarAula()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nova Matrícula -->
+<div class="modal fade" id="modalMatricula" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Nova Matrícula / Assinatura</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Usuário *</label>
+          <select id="mat-usuario" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Tipo *</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoMatricula" id="tipo-curso" value="curso" checked>
+            <label class="form-check-label" for="tipo-curso">Matrícula em Curso</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipoMatricula" id="tipo-plano" value="plano">
+            <label class="form-check-label" for="tipo-plano">Assinar Plano</label>
+          </div>
+        </div>
+        <div id="mat-grupo-curso">
+          <div class="mb-3">
+            <label class="form-label">Curso *</label>
+            <select id="mat-curso" class="form-select">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+        </div>
+        <div id="mat-grupo-plano" class="d-none">
+          <div class="mb-3">
+            <label class="form-label">Plano *</label>
+            <select id="mat-plano" class="form-select">
+              <option value="">Selecione...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Método de Pagamento *</label>
+            <select id="mat-metodo" class="form-select">
+              <option value="">Selecione...</option>
+              <option>Cartão de Crédito</option>
+              <option>PIX</option>
+              <option>Boleto Bancário</option>
+            </select>
+          </div>
+        </div>
+        <div id="mat-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarMatricula()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Marcar Progresso -->
+<div class="modal fade" id="modalProgresso" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Marcar Aula como Concluída</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Usuário *</label>
+          <select id="prog-usuario" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Aula *</label>
+          <select id="prog-aula" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div id="prog-erro" class="text-danger d-none"></div>
+        <div class="alert alert-info small mt-2 mb-0">
+          💡 Ao concluir todas as aulas de um curso, o certificado é emitido automaticamente.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-success" onclick="salvarProgresso()">Marcar como Concluída</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nova Avaliação -->
+<div class="modal fade" id="modalAvaliacao" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title">Nova Avaliação</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Usuário *</label>
+          <select id="avl-usuario" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Curso *</label>
+          <select id="avl-curso" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nota * (1 a 5)</label>
+          <input type="number" id="avl-nota" class="form-control" min="1" max="5" placeholder="1 a 5">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Comentário (opcional)</label>
+          <textarea id="avl-comentario" class="form-control" rows="3" placeholder="Deixe um comentário..."></textarea>
+        </div>
+        <div id="avl-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-warning" onclick="salvarAvaliacao()">Avaliar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Nova Trilha -->
+<div class="modal fade" id="modalTrilha" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Nova Trilha de Conhecimento</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Título *</label>
+          <input type="text" id="tri-titulo" class="form-control" placeholder="Ex: Trilha Full Stack">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Descrição</label>
+          <textarea id="tri-desc" class="form-control" rows="3" placeholder="Descrição da trilha"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Categoria *</label>
+          <select id="tri-categoria" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div id="tri-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarTrilha()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Vincular Curso à Trilha -->
+<div class="modal fade" id="modalTrilhaCurso" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Vincular Curso à Trilha</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Trilha *</label>
+          <select id="tc-trilha" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Curso *</label>
+          <select id="tc-curso" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Ordem na Trilha *</label>
+          <input type="number" id="tc-ordem" class="form-control" min="1" placeholder="1">
+        </div>
+        <div id="tc-erro" class="text-danger d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarTrilhaCurso()">Vincular</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Plano -->
+<div class="modal fade" id="modalPlano" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Novo Plano</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Nome *</label>
+          <input type="text" id="pla-nome" class="form-control" placeholder="Ex: Plano Mensal">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Descrição</label>
+          <textarea id="pla-desc" class="form-control" rows="2" placeholder="Benefícios do plano"></textarea>
+        </div>
+        <div class="row g-2">
+          <div class="col-6">
+            <label class="form-label">Preço (R$) *</label>
+            <input type="number" id="pla-preco" class="form-control" min="0.01" step="0.01" placeholder="49.90">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Duração (meses) *</label>
+            <input type="number" id="pla-duracao" class="form-control" min="1" placeholder="1">
+          </div>
+        </div>
+        <div id="pla-erro" class="text-danger mt-2 d-none"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="salvarPlano()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Checkout / Pagamento -->
+<div class="modal fade" id="modalCheckout" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">💳 Checkout — Novo Pagamento</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Usuário *</label>
+          <select id="pay-usuario" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Plano *</label>
+          <select id="pay-plano" class="form-select">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Método de Pagamento *</label>
+          <select id="pay-metodo" class="form-select">
+            <option value="">Selecione...</option>
+            <option>Cartão de Crédito</option>
+            <option>PIX</option>
+            <option>Boleto Bancário</option>
+          </select>
+        </div>
+        <div id="pay-erro" class="text-danger d-none"></div>
+        <div class="alert alert-success small mb-0 mt-2">
+          ✅ Um ID de transação será gerado automaticamente após a confirmação.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-success" onclick="realizarCheckout()">Confirmar Pagamento</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Scripts ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/models.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
