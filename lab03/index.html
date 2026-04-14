@@ -5,23 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MilhomemPlataforma — LAB03</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     NAVBAR
-════════════════════════════════════════════ -->
+<!-- NAVBAR -->
 <nav class="navbar navbar-dark bg-primary shadow-sm">
   <div class="container-fluid">
     <span class="navbar-brand fw-bold">📚 MilhomemPlataforma</span>
-    <span class="text-white-50 small">LAB03 — Plataforma de Cursos Online</span>
+    <span class="text-white-50 small">LAB03 — Plataforma de Cursos Online (MVC)</span>
   </div>
 </nav>
 
-<!-- ═══════════════════════════════════════════
-     ABAS DE NAVEGACAO
-════════════════════════════════════════════ -->
+<!-- ABAS DE NAVEGACAO -->
 <div class="container-fluid mt-3 px-4">
   <ul class="nav nav-tabs flex-nowrap overflow-auto" id="mainTab">
     <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#tab-usuarios">Usuários</a></li>
@@ -38,9 +34,7 @@
 
   <div class="tab-content mt-3" id="mainTabContent">
 
-    <!-- ──────────────────────────────────────
-         ABA: USUARIOS
-    ─────────────────────────────────────── -->
+    <!-- ABA: USUARIOS -->
     <div class="tab-pane fade show active" id="tab-usuarios">
       <div class="section-header">
         <h6>Usuários Cadastrados</h6>
@@ -54,9 +48,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: CATEGORIAS
-    ─────────────────────────────────────── -->
+    <!-- ABA: CATEGORIAS -->
     <div class="tab-pane fade" id="tab-categorias">
       <div class="section-header">
         <h6>Categorias</h6>
@@ -70,9 +62,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: CURSOS
-    ─────────────────────────────────────── -->
+    <!-- ABA: CURSOS -->
     <div class="tab-pane fade" id="tab-cursos">
       <div class="section-header">
         <h6>Cursos</h6>
@@ -94,9 +84,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: MODULOS
-    ─────────────────────────────────────── -->
+    <!-- ABA: MODULOS -->
     <div class="tab-pane fade" id="tab-modulos">
       <div class="section-header">
         <h6>Módulos</h6>
@@ -110,9 +98,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: AULAS
-    ─────────────────────────────────────── -->
+    <!-- ABA: AULAS -->
     <div class="tab-pane fade" id="tab-aulas">
       <div class="section-header">
         <h6>Aulas</h6>
@@ -126,9 +112,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: MATRICULAS
-    ─────────────────────────────────────── -->
+    <!-- ABA: MATRICULAS -->
     <div class="tab-pane fade" id="tab-matriculas">
       <div class="section-header">
         <h6>Matrículas e Assinaturas</h6>
@@ -142,9 +126,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: PROGRESSO
-    ─────────────────────────────────────── -->
+    <!-- ABA: PROGRESSO -->
     <div class="tab-pane fade" id="tab-progresso">
       <div class="row g-3">
         <div class="col-12">
@@ -173,9 +155,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: AVALIACOES
-    ─────────────────────────────────────── -->
+    <!-- ABA: AVALIACOES -->
     <div class="tab-pane fade" id="tab-avaliacoes">
       <div class="section-header">
         <h6>Avaliações de Cursos</h6>
@@ -189,9 +169,7 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: TRILHAS
-    ─────────────────────────────────────── -->
+    <!-- ABA: TRILHAS -->
     <div class="tab-pane fade" id="tab-trilhas">
       <div class="row g-3">
         <div class="col-12">
@@ -223,12 +201,9 @@
       </div>
     </div>
 
-    <!-- ──────────────────────────────────────
-         ABA: FINANCEIRO
-    ─────────────────────────────────────── -->
+    <!-- ABA: FINANCEIRO -->
     <div class="tab-pane fade" id="tab-financeiro">
       <div class="row g-3">
-        <!-- Planos -->
         <div class="col-12">
           <div class="section-header">
             <h6>Planos</h6>
@@ -241,7 +216,6 @@
             </table>
           </div>
         </div>
-        <!-- Checkout -->
         <div class="col-12">
           <div class="section-header">
             <h6>Assinaturas Ativas</h6>
@@ -254,7 +228,6 @@
             </table>
           </div>
         </div>
-        <!-- Pagamentos -->
         <div class="col-12">
           <div class="section-header">
             <h6>Histórico de Pagamentos</h6>
@@ -273,9 +246,7 @@
 </div><!-- /container -->
 
 
-<!-- ═══════════════════════════════════════════
-     MODAIS
-════════════════════════════════════════════ -->
+<!-- ═══════════════ MODAIS ═══════════════ -->
 
 <!-- MODAL: Novo Usuário -->
 <div class="modal fade" id="modalUsuario" tabindex="-1">
@@ -355,15 +326,11 @@
           </div>
           <div class="col-md-6">
             <label class="form-label">Instrutor *</label>
-            <select id="cur-instrutor" class="form-select">
-              <option value="">Selecione...</option>
-            </select>
+            <select id="cur-instrutor" class="form-select"><option value="">Selecione...</option></select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Categoria *</label>
-            <select id="cur-categoria" class="form-select">
-              <option value="">Selecione...</option>
-            </select>
+            <select id="cur-categoria" class="form-select"><option value="">Selecione...</option></select>
           </div>
           <div class="col-md-4">
             <label class="form-label">Nível *</label>
@@ -404,9 +371,7 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Curso *</label>
-          <select id="mod-curso" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="mod-curso" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Título do Módulo *</label>
@@ -438,9 +403,7 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">Módulo *</label>
-            <select id="aul-modulo" class="form-select">
-              <option value="">Selecione...</option>
-            </select>
+            <select id="aul-modulo" class="form-select"><option value="">Selecione...</option></select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Tipo de Conteúdo *</label>
@@ -489,9 +452,7 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Usuário *</label>
-          <select id="mat-usuario" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="mat-usuario" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Tipo *</label>
@@ -507,17 +468,13 @@
         <div id="mat-grupo-curso">
           <div class="mb-3">
             <label class="form-label">Curso *</label>
-            <select id="mat-curso" class="form-select">
-              <option value="">Selecione...</option>
-            </select>
+            <select id="mat-curso" class="form-select"><option value="">Selecione...</option></select>
           </div>
         </div>
         <div id="mat-grupo-plano" class="d-none">
           <div class="mb-3">
             <label class="form-label">Plano *</label>
-            <select id="mat-plano" class="form-select">
-              <option value="">Selecione...</option>
-            </select>
+            <select id="mat-plano" class="form-select"><option value="">Selecione...</option></select>
           </div>
           <div class="mb-3">
             <label class="form-label">Método de Pagamento *</label>
@@ -550,15 +507,11 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Usuário *</label>
-          <select id="prog-usuario" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="prog-usuario" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Aula *</label>
-          <select id="prog-aula" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="prog-aula" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div id="prog-erro" class="text-danger d-none"></div>
         <div class="alert alert-info small mt-2 mb-0">
@@ -584,15 +537,11 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Usuário *</label>
-          <select id="avl-usuario" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="avl-usuario" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Curso *</label>
-          <select id="avl-curso" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="avl-curso" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Nota * (1 a 5)</label>
@@ -631,9 +580,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label">Categoria *</label>
-          <select id="tri-categoria" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="tri-categoria" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div id="tri-erro" class="text-danger d-none"></div>
       </div>
@@ -656,15 +603,11 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Trilha *</label>
-          <select id="tc-trilha" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="tc-trilha" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Curso *</label>
-          <select id="tc-curso" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="tc-curso" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Ordem na Trilha *</label>
@@ -717,7 +660,7 @@
   </div>
 </div>
 
-<!-- MODAL: Checkout / Pagamento -->
+<!-- MODAL: Checkout -->
 <div class="modal fade" id="modalCheckout" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -728,15 +671,11 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Usuário *</label>
-          <select id="pay-usuario" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="pay-usuario" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Plano *</label>
-          <select id="pay-plano" class="form-select">
-            <option value="">Selecione...</option>
-          </select>
+          <select id="pay-plano" class="form-select"><option value="">Selecione...</option></select>
         </div>
         <div class="mb-3">
           <label class="form-label">Método de Pagamento *</label>
@@ -760,10 +699,9 @@
   </div>
 </div>
 
-<!-- ═══ Scripts ═══ -->
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/models.js"></script>
-<script src="js/app.js"></script>
+<script type="module" src="main.mjs"></script>
 
 </body>
 </html>
