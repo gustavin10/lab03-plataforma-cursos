@@ -1,25 +1,31 @@
 import { Categoria } from '../model/Categoria.mjs';
 
-const _categorias = [];
+const KEY = 'categorias';
 
 export class CategoriaService {
+  #listarRaw() {
+    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+  }
+
   listar() {
-    return [..._categorias];
+    return this.#listarRaw();
   }
 
   buscarPorId(id) {
-    return _categorias.find(c => c.id === id) ?? null;
+    return this.#listarRaw().find(c => c.id === id) ?? null;
   }
 
   salvar(dados) {
     const erros = Categoria.validar(dados);
     if (erros.length) throw new Error(erros.join(' | '));
-    const duplicado = _categorias.find(
+    const lista = this.#listarRaw();
+    const duplicado = lista.find(
       c => c.nome.toLowerCase() === dados.nome.trim().toLowerCase()
     );
     if (duplicado) throw new Error('Já existe uma categoria com este nome.');
     const categoria = new Categoria(dados.nome, dados.descricao);
-    _categorias.push(categoria);
+    lista.push(categoria);
+    localStorage.setItem(KEY, JSON.stringify(lista));
     return categoria;
   }
 }

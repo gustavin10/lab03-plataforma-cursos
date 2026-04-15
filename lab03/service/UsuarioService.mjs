@@ -1,18 +1,24 @@
 import { Usuario } from '../model/Usuario.mjs';
 
-const _usuarios = [];
+const KEY = 'usuarios';
 
 export class UsuarioService {
+  #listarRaw() {
+    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+  }
+
   listar() {
-    return [..._usuarios];
+    return this.#listarRaw();
   }
 
   buscarPorId(id) {
-    return _usuarios.find(u => u.id === id) ?? null;
+    return this.#listarRaw().find(u => u.id === id) ?? null;
   }
 
   buscarPorEmail(email) {
-    return _usuarios.find(u => u.email.toLowerCase() === email.toLowerCase()) ?? null;
+    return this.#listarRaw().find(
+      u => u.email.toLowerCase() === email.toLowerCase()
+    ) ?? null;
   }
 
   salvar(dados) {
@@ -21,7 +27,9 @@ export class UsuarioService {
     if (this.buscarPorEmail(dados.email))
       throw new Error('Já existe um usuário com este e-mail.');
     const usuario = new Usuario(dados.nomeCompleto, dados.email, dados.senha);
-    _usuarios.push(usuario);
+    const lista = this.#listarRaw();
+    lista.push(usuario);
+    localStorage.setItem(KEY, JSON.stringify(lista));
     return usuario;
   }
 }

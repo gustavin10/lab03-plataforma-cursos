@@ -1,18 +1,22 @@
 import { Curso } from '../model/Curso.mjs';
 
-const _cursos = [];
+const KEY = 'cursos';
 
 export class CursoService {
+  #listarRaw() {
+    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+  }
+
   listar() {
-    return [..._cursos];
+    return this.#listarRaw();
   }
 
   listarPorCategoria(idCategoria) {
-    return _cursos.filter(c => c.idCategoria === idCategoria);
+    return this.#listarRaw().filter(c => c.idCategoria === idCategoria);
   }
 
   buscarPorId(id) {
-    return _cursos.find(c => c.id === id) ?? null;
+    return this.#listarRaw().find(c => c.id === id) ?? null;
   }
 
   salvar(dados) {
@@ -27,7 +31,9 @@ export class CursoService {
       dados.totalAulas,
       dados.totalHoras
     );
-    _cursos.push(curso);
+    const lista = this.#listarRaw();
+    lista.push(curso);
+    localStorage.setItem(KEY, JSON.stringify(lista));
     return curso;
   }
 }

@@ -1,18 +1,24 @@
 import { Aula } from '../model/Aula.mjs';
 
-const _aulas = [];
+const KEY = 'aulas';
 
 export class AulaService {
+  #listarRaw() {
+    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+  }
+
   listar() {
-    return [..._aulas].sort((a, b) => a.ordem - b.ordem);
+    return this.#listarRaw().sort((a, b) => a.ordem - b.ordem);
   }
 
   listarPorModulo(idModulo) {
-    return _aulas.filter(a => a.idModulo === idModulo);
+    return this.#listarRaw()
+      .filter(a => a.idModulo === idModulo)
+      .sort((a, b) => a.ordem - b.ordem);
   }
 
   buscarPorId(id) {
-    return _aulas.find(a => a.id === id) ?? null;
+    return this.#listarRaw().find(a => a.id === id) ?? null;
   }
 
   salvar(dados) {
@@ -26,7 +32,9 @@ export class AulaService {
       dados.duracaoMinutos,
       dados.ordem
     );
-    _aulas.push(aula);
+    const lista = this.#listarRaw();
+    lista.push(aula);
+    localStorage.setItem(KEY, JSON.stringify(lista));
     return aula;
   }
 }

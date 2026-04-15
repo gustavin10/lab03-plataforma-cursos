@@ -1,26 +1,34 @@
 import { ProgressoAula } from '../model/ProgressoAula.mjs';
 import { Certificado } from '../model/Certificado.mjs';
 
-const _progressos = [];
-const _certificados = [];
+const KEY_PROGRESSOS = 'progressos';
+const KEY_CERTIFICADOS = 'certificados';
 
 export class ProgressoService {
+  #listarProgressosRaw() {
+    return JSON.parse(localStorage.getItem(KEY_PROGRESSOS) ?? '[]');
+  }
+
+  #listarCertificadosRaw() {
+    return JSON.parse(localStorage.getItem(KEY_CERTIFICADOS) ?? '[]');
+  }
+
   listarProgressos() {
-    return [..._progressos];
+    return this.#listarProgressosRaw();
   }
 
   listarCertificados() {
-    return [..._certificados];
+    return this.#listarCertificadosRaw();
   }
 
   buscarProgresso(idUsuario, idAula) {
-    return _progressos.find(
+    return this.#listarProgressosRaw().find(
       p => p.idUsuario === idUsuario && p.idAula === idAula
     ) ?? null;
   }
 
   buscarCertificado(idUsuario, idCurso) {
-    return _certificados.find(
+    return this.#listarCertificadosRaw().find(
       c => c.idUsuario === idUsuario && c.idCurso === idCurso
     ) ?? null;
   }
@@ -31,7 +39,9 @@ export class ProgressoService {
     if (this.buscarProgresso(idUsuario, idAula))
       throw new Error('Esta aula já foi marcada como concluída.');
     const progresso = new ProgressoAula(idUsuario, idAula);
-    _progressos.push(progresso);
+    const lista = this.#listarProgressosRaw();
+    lista.push(progresso);
+    localStorage.setItem(KEY_PROGRESSOS, JSON.stringify(lista));
     return progresso;
   }
 
@@ -42,14 +52,17 @@ export class ProgressoService {
     );
     if (aulasDoCurso.length === 0) return null;
 
-    const concluidas = _progressos.filter(
+    const progressos = this.#listarProgressosRaw();
+    const concluidas = progressos.filter(
       p => p.idUsuario === idUsuario && aulasDoCurso.some(a => a.id === p.idAula)
     );
 
     if (concluidas.length === aulasDoCurso.length) {
       if (!this.buscarCertificado(idUsuario, idCurso)) {
         const cert = new Certificado(idUsuario, idCurso);
-        _certificados.push(cert);
+        const listaCerts = this.#listarCertificadosRaw();
+        listaCerts.push(cert);
+        localStorage.setItem(KEY_CERTIFICADOS, JSON.stringify(listaCerts));
         if (typeof marcarMatriculaConcluida === 'function')
           marcarMatriculaConcluida(idUsuario, idCurso);
         return cert;

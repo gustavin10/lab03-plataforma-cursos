@@ -1,14 +1,18 @@
 import { Avaliacao } from '../model/Avaliacao.mjs';
 
-const _avaliacoes = [];
+const KEY = 'avaliacoes';
 
 export class AvaliacaoService {
+  #listarRaw() {
+    return JSON.parse(localStorage.getItem(KEY) ?? '[]');
+  }
+
   listar() {
-    return [..._avaliacoes];
+    return this.#listarRaw();
   }
 
   buscarPorUsuarioECurso(idUsuario, idCurso) {
-    return _avaliacoes.find(
+    return this.#listarRaw().find(
       a => a.idUsuario === idUsuario && a.idCurso === idCurso
     ) ?? null;
   }
@@ -24,7 +28,9 @@ export class AvaliacaoService {
       dados.nota,
       dados.comentario
     );
-    _avaliacoes.push(avaliacao);
+    const lista = this.#listarRaw();
+    lista.push(avaliacao);
+    localStorage.setItem(KEY, JSON.stringify(lista));
     return avaliacao;
   }
 }
